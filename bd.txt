@@ -1,0 +1,37 @@
+	
+	CREATE TABLE Tipo (
+    idTipo SERIAL PRIMARY KEY,
+    descripcion VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE Cliente (
+    idCliente SERIAL PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL,
+    apellido VARCHAR(255) NOT NULL,
+    email VARCHAR(255),
+    celular VARCHAR(20),
+    direccion VARCHAR(255)
+);
+
+CREATE TABLE Nota (
+    idNota SERIAL PRIMARY KEY,
+    fecha DATE,
+    costo VARCHAR(20),
+    dias VARCHAR(10),
+    idCliente INT REFERENCES Cliente(idCliente)
+);
+
+CREATE TABLE Bicicleta (
+    idBicicleta SERIAL PRIMARY KEY,
+    modelo VARCHAR(255),
+    color VARCHAR(50),
+    estado VARCHAR(50),
+    idTipo INT REFERENCES Tipo(idTipo)
+);
+
+CREATE TABLE NotaBicicleta (
+    idNota INT REFERENCES Nota(idNota),
+    idBicicleta INT REFERENCES Bicicleta(idBicicleta),
+    observacion VARCHAR(255),
+    PRIMARY KEY (idNota, idBicicleta)
+);
